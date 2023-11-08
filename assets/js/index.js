@@ -3,14 +3,30 @@
 // import all components and functions
 import { sidebar } from "./sidebar.js";
 import { api_key, imageBaseUrl, fetchDataFromServer } from "./api.js";
+import { createMovieCard } from "./movieCard.js";
 
 const pageContent = document.querySelector("[page-content]");
 
 sidebar();
 
+/**
+ * Home page section (Top rated, Upcoming, Trending movies) 
+ */
 
-
-
+const homePageSection = [
+    {
+        title: 'Upcoming Movies',
+        path: 'movie/upcoming',
+    },
+    {
+        title: 'Weekly Trending Movies',
+        path: 'trending/movie/week',
+    },
+    {
+        title: 'Top Rated Movies',
+        path: 'movie/top_rated',
+    }
+]
 
 /**
  * fetch all genres : [{ "id": "123", "name": "Action"}]
@@ -76,12 +92,12 @@ const heroBanner = ({results: movieList}) => {
         <div class="banner-content">
             <h2 class="heading">${title}</h2>
             <div class="meta-list">
-                <div class="meta-item">${release_date.split("-")[0]}</div>
+                <div class="meta-item">${release_date.split("-")[0] ?? "Not Released"}</div>
                 <div class="meta-item card-badge">${vote_average.toFixed(1)}</div>
             </div>
             <p class="genre">${genreList.asString(genre_ids)}</p>
             <p class="banner-text">${overview}</p>
-            <a href="./detail.html" class="btn">
+            <a href="./detail.html" class="btn" onclick="getMovieDetail(${id})">
                 <img src="./assets/images/play_circle.png" width="24" height="24" aria-hidden="true" alt="">
                 <span class="span">Watch Now</span>
             </a>
@@ -105,12 +121,20 @@ const heroBanner = ({results: movieList}) => {
     pageContent.appendChild(banner);
 
     addHeroSlide();
+
+    /**
+     * fetch data for home page section (Top rated, Upcoming, Trending movies)
+     */
+
+    for (const { title, path } of homePageSection) {
+        fetchDataFromServer(`https://api.themoviedb.org/3/${path}?api_key=${api_key}&page=1`, createMovieList, title);
+    }
 }
 
 /** 
     * Hero slider funcitonality
  */
-
+            
 const addHeroSlide = () => {
     const sliderItems = document.querySelectorAll("[slider-item]");
     const sliderControl = document.querySelectorAll("[slider-control]");
@@ -136,4 +160,28 @@ const addHeroSlide = () => {
     addEventOnElements(sliderControl, "click", sliderStart);
 
 
+}
+
+const createMovieList = function({results: movieList}, title) {
+    const movieListElem = document.createElement("section");
+    movieListElem.classList.add("movie-list");
+    movieListElem.ariaLabel = `${title}`;
+
+    movieListElem.innerHTML = `
+    <div class="title-wrapper">
+        <h3 class="title_large">${title}</h3>
+    </div>
+
+    <div class="slider-list">
+        <div class="slider-inner"></div>
+    </div>
+    `;
+
+    for(const movie of movieList) {
+        const movieCard = createMovieCard(movie); // called from movieCard.js
+
+        movieListElem.querySelector(".slider-inner").appendChild(movieCard);
+    }
+
+    pageContent.appendChild(movieListElem);
 }

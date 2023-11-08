@@ -19,12 +19,6 @@ export const sidebar = () => {
         sidebarInner.innerHTML = `
         <div class="sidebar-list">
             <p class="title">Genre</p>
-            <a href="./movie-list.html" menu-close class="sidebar-link">Action</a>
-            <a href="./movie-list.html" menu-close class="sidebar-link">Horror</a>
-            <a href="./movie-list.html" menu-close class="sidebar-link">Comedy</a>
-            <a href="./movie-list.html" menu-close class="sidebar-link">Adventure</a>
-            <a href="./movie-list.html" menu-close class="sidebar-link">Drama</a>
-            <a href="./movie-list.html" menu-close class="sidebar-link">Sci-fi</a>
         </div>
 
         <div class="sidebar-list">
@@ -32,7 +26,6 @@ export const sidebar = () => {
             <a href="./movie-list.html" menu-close class="sidebar-link">English</a>
             <a href="./movie-list.html" menu-close class="sidebar-link">Hindi</a>
             <a href="./movie-list.html" menu-close class="sidebar-link">French</a>
-            <a href="./movie-list.html" menu-close class="sidebar-link">German</a>
         </div>
 
         <div class="sidebar-footer">

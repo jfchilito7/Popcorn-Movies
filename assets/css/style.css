@@ -309,7 +309,7 @@ body {
     width: calc(100% - 40px);
  }
 
-.container::after,
+/* .container::after, */
 .search-modal::after {
     content: "";
     position: fixed;
@@ -652,8 +652,8 @@ body {
     width: 200px;
 }
 
-.movies-card .movie-banner {
-    min-width: 200px;
+.movies-card .card-banner {
+    width: 200px;
 }
 
 .movies-card .title {
