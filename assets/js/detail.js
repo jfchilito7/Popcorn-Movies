@@ -20,7 +20,8 @@ const getGenres = function(genreList) {
 const getCasts = function(castList) {
     const newCastList = [];
 
-    for (let i = 0, len = castList.length; i < len && i < 10; i++) {
+    for (let i = 0, len = castList.length; i < len && i
+         < 10; i++) {
         const {name} = castList[i];
         newCastList.push(name);
     }
