@@ -4,6 +4,8 @@ Popcorn Movies es una aplicación web que permite a los usuarios descubrir pelí
 
 # Video - Imagen
 
+![Descripción](assets/docs/mockup3.png)
+![Descripción](assets/docs/MOCKUP1.jpeg)
 Click para ver el video
 [![Watch the video](assets/docs/img1.png)](https://youtu.be/3LcBXYVA_WE)
 ![Descripción](assets/docs/img2.png)
